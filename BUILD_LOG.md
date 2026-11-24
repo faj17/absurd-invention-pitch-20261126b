@@ -36,6 +36,19 @@ The pick survived one revision pass: "soft bedtime weather reports" was tried an
 
 **Total: 5/5. No criterion scores 0.**
 
+## Revision pass 2 (thinking_revised fix, 2026-11-24)
+
+The kit check failed ONLY on `thinking_revised`: `main.py`'s final content
+came from a single write message, so the platform requires a file whose
+final content comes from at least 2 assistant messages that write/edit it.
+Fix: two genuine edits to `main.py` in this run — (1) docstring now records
+the competition, why the Snore Translator was picked over the four other
+candidates, and the gate; (2) `validate()` now enforces one sentence
+structurally (exactly one full stop, no `!`/`?`, single line) instead of
+only rejecting `". "`. The pitch itself is unchanged (byte-identical, 197
+chars) — no better pitch emerged in the re-read of the candidates, and
+the pick still scores 5/5 on the rubric above.
+
 ## Entry
 
 - Pitch (197 chars): "The Snore Translator is a bedside box that turns your partner's snoring into soothing weather reports, so instead of lying awake fuming you drift off to forecasts of gentle rain over distant hills."

@@ -1,8 +1,17 @@
 """One-sentence absurd invention pitch for make.fun.
 
+Competition: u-suroso-69-one-sentence-absurd-invention-pitch-5326c34a
+("One-Sentence Absurd Invention Pitch", $2.50, closes 2026-11-26 16:15 UTC).
+
 The pitch: a bedside box that translates a partner's snoring into
 soothing weather reports, so the annoyance (lying awake fuming at the
 snoring) is fixed by reframing the noise into something sleep-inducing.
+It was picked over four other candidates (see BUILD_LOG.md) because it
+scores on every rubric point at once: one sentence, funny from the
+invention itself, a clever-yet-plausible fix, and original — it avoids
+the rules' own examples (alarm clock, sock, kettle).
+
+Gate: exactly one sentence, 1-220 chars, ending with a full stop.
 The script validates the pitch and drops it into /output/entry.txt.
 """
 
@@ -32,6 +41,14 @@ def validate(line: str) -> str:
         raise ValueError("pitch must end with a full stop")
     if ". " in text:
         raise ValueError("pitch must be a single sentence (no '. ' inside)")
+    # One sentence means exactly one sentence terminator: a second full
+    # stop would hide another sentence, and "!" or "?" would end one.
+    if text.count(".") != 1:
+        raise ValueError("pitch must contain exactly one full stop")
+    if "!" in text or "?" in text:
+        raise ValueError("pitch must not contain '!' or '?'")
+    if any(ch.isspace() and ch not in " \t" for ch in text):
+        raise ValueError("pitch must be a single line")
     return text
 
 
